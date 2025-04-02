@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon GO Webstore</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link to external CSS file -->
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <img src="images/logo.png" alt="Pokemon GO Logo" class="logo"> <!-- Logo Image -->
+            <h1 class="webstore-title">Webstore</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="store.html">Store</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="payment.html">Payment</a></li>
+                    <li><a href="history.html">Transaction History</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Advertisement Slider -->
+    <section class="slider">
+        <div class="slide">
+            <p>🔥 Limited-time discounts on Pokéballs! Get yours now! 🔥</p>
+        </div>
+        <div class="slide">
+            <p>🎉 Special event: Double XP for all purchases this weekend! 🎉</p>
+        </div>
+        <div class="slide">
+            <p>💎 Get exclusive items with our premium bundles! 💎</p>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main>
+        <h2>Welcome to the Pokemon GO Webstore</h2>
+        <p>Buy in-game items, manage your account, and view your transaction history.</p>
+        
+      <!-- Store Items -->
+<section class="store-items">
+    <div class="item-box">
+        <img src="images/pokeball.png" alt="Pokeball" class="item-image">
+        <p class="item-name">Pokéball</p>
+        <p class="item-price">₱10.00</p>
+    </div>
+    <div class="item-box">
+        <img src="images/potion.png" alt="Potion" class="item-image">
+        <p class="item-name">Potion</p>
+        <p class="item-price">₱20.00</p>
+    </div>
+    <div class="item-box">
+        <img src="images/revive.png" alt="Revive" class="item-image">
+        <p class="item-name">Revive</p>
+        <p class="item-price">₱30.00</p>
+    </div>
+    <div class="item-box">
+        <img src="images/battlepass.png" alt="Battle Pass" class="item-image">
+        <p class="item-name">Battle Pass</p>
+        <p class="item-price">₱40.00</p>
+    </div>
+</section>
+
+    </main>
+    <!-- Link to external JavaScript file -->
+    <script src="js/script.js"></script>
+    
+    <style>
+        body {
+            background-image: url('images/background.jpg'); /* Background Image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #white;
+            border-radius: 10px;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+        .webstore-title {
+            color: #ffffff;
+            font-size: 1.5em;
+        }
+        .slider {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .slide {
+            display: inline-block;
+            padding: 10px;
+            animation: slide 10s linear infinite;
+        }
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .store-items .item {
+            display: inline-block;
+            text-align: center;
+            margin: 20px;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .store-items .item:hover {
+            transform: scale(1.1);
+        }
+        footer {
+            background-color: #59adbc;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</body>
+
+   <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Niantic, Inc. | Educational Purposes Only | No Copyright Infringement Intended</p>
+    </footer>
+  
+</html>

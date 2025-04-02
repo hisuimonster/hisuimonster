@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - Pokémon GO Webstore</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e9f5ff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: #0a58ca;
+            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        main {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #0a58ca;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: #0a58ca;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        .no-transactions {
+            color: red;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>Pokémon GO Webstore - Transaction History</header>
+
+    <main>
+        <h2>Your Past Transactions</h2>
+        <p id="no-transactions" class="no-transactions">No transactions yet.</p>
+
+        <h2>Transaction History</h2>
+        <table id="history-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Items</th>
+                    <th>Total Price</th>
+                    <th>Payment Method</th>
+                </tr>
+            </thead>
+            <tbody id="order-history"></tbody>
+        </table>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const historyTable = document.getElementById("order-history");
+            const noTransactionsMessage = document.getElementById("no-transactions");
+            let history = JSON.parse(localStorage.getItem("transactionHistory")) || [];
+
+            if (history.length === 0) {
+                noTransactionsMessage.style.display = "block";
+                return;
+            }
+
+            noTransactionsMessage.style.display = "none";
+
+            history.forEach(order => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${order.date}</td>
+                    <td>${order.items.map(item => `<strong>${item.quantity}x</strong> ${item.name}`).join(", ")}</td>
+                    <td><strong>₱${order.totalPrice.toFixed(2)}</strong></td>
+                    <td>${order.paymentMethod}</td>
+                `;
+                historyTable.appendChild(row);
+            });
+        });
+    </script>
+</body>
+</html>

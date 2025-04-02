@@ -1,0 +1,63 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("✅ Payment page loaded");
+
+        const cartItemsContainer = document.getElementById("cart-items");
+        const totalPriceElement = document.getElementById("total-price");
+        const confirmButton = document.getElementById("confirmPayment");
+        const paymentSelect = document.getElementById("payment");
+
+        let cart = JSON.parse(localStorage.getItem("checkoutCart")) || [];
+
+        if (cart.length === 0) {
+            alert("No items found in cart. Redirecting to cart...");
+            window.location.href = "cart.html"; 
+            return;
+        }
+
+        let totalPrice = 0;
+        cartItemsContainer.innerHTML = "";
+
+        cart.forEach(item => {
+            let row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>₱${item.price.toFixed(2)}</td>
+                <td>${item.quantity}</td>
+                <td>₱${(item.price * item.quantity).toFixed(2)}</td>
+            `;
+            cartItemsContainer.appendChild(row);
+            totalPrice += item.price * item.quantity;
+        });
+
+        totalPriceElement.textContent = totalPrice.toFixed(2);
+        console.log("💰 Total price calculated:", totalPrice);
+
+        confirmButton.addEventListener("click", function () {
+            console.log("🛑 Confirm Payment button clicked");
+
+            const paymentMethod = paymentSelect.value;
+            if (!paymentMethod || paymentMethod === "--Choose Payment Method--") {
+                alert("Please select a payment method.");
+                return;
+            }
+
+            const transaction = {
+                date: new Date().toLocaleString(),
+                items: cart,
+                totalPrice: totalPrice,
+                paymentMethod: paymentMethod
+            };
+
+            let history = JSON.parse(localStorage.getItem("transactionHistory")) || [];
+            history.push(transaction);
+
+            localStorage.setItem("transactionHistory", JSON.stringify(history));
+            console.log("✅ Transaction saved!");
+
+            localStorage.removeItem("checkoutCart"); // Clear cart after payment
+            alert("✅ Payment successful! Redirecting to transaction history...");
+            window.location.href = "history.html";
+        });
+    });
+</script>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Pokémon GO</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background-color: #dce4f7;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .register-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+        }
+        .register-container h2 {
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .gender-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .gender-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: lightgray;
+        }
+        .gender-btn.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .register-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Register</h2>
+        <input type="email" id="email" class="input-field" placeholder="Email" required>
+        <input type="password" id="password" class="input-field" placeholder="Password" required>
+        <input type="password" id="confirm-password" class="input-field" placeholder="Confirm Password" required>
+        <input type="text" id="player-id" class="input-field" readonly>
+        
+        <div class="gender-buttons">
+            <button id="male-btn" class="gender-btn" onclick="selectGender('Male')">Male</button>
+            <button id="female-btn" class="gender-btn" onclick="selectGender('Female')">Female</button>
+        </div>
+        
+        <input type="text" id="username" class="input-field" placeholder="Enter Username" required>
+        <button class="register-btn" onclick="registerUser()">Register</button>
+    </div>
+
+    <script>
+        let playerIdCounter = 123456789101;
+        document.getElementById("player-id").value = formatPlayerID(playerIdCounter);
+
+        function formatPlayerID(id) {
+            return id.toString().replace(/(\d{4})(\d{4})(\d{4})/, "$1 $2 $3");
+        }
+
+        function selectGender(gender) {
+            document.getElementById("male-btn").classList.remove("active");
+            document.getElementById("female-btn").classList.remove("active");
+            
+            if (gender === 'Male') {
+                document.getElementById("male-btn").classList.add("active");
+            } else {
+                document.getElementById("female-btn").classList.add("active");
+            }
+        }
+
+        function registerUser() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            const playerID = document.getElementById("player-id").value;
+            const username = document.getElementById("username").value;
+            const gender = document.getElementById("male-btn").classList.contains("active") ? 'Male' : 'Female';
+
+            if (!email || !password || !confirmPassword || !username) {
+                alert("Please fill in all fields.");
+                return;
+            }
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            localStorage.setItem("userProfile", JSON.stringify({ email, playerID, username, gender }));
+            window.location.href = "profile.html";
+        }
+    </script>
+</body>
+</html>
